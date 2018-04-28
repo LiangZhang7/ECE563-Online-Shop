@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}
+Thank you
+{% endblock %}
+
+{% block content %}
+<h1>welcome: {{user.username}} !</h1>
+    <p><a href ="{% url 'shop:logout' %}">logout</a></p>
+	{% if user%}
+		<p><a href ="{% url 'orders:history' %}">order history</a></p>
+	{% endif %}
+
+	<div style = "color:brown">
+    <h1>Thank You for your Purchase!</h1>
+    <p>Order completed successfully! Here is your order number: 
+<strong>{{ order.id }}</strong>.</p>
+{% endblock %}

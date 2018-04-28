@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Order{% endblock %}
+{% block content %}
+<center>
+<h1>Order Hitory</h1>
+<table>
+  <tr>
+      <th>Order ID</th>
+      <th>Paid</th>
+      <th>Shipped</th>
+  </tr>
+    {% for order in orders %}
+        <tr>
+			<td>{{order.id}}</td>
+            {% if order.paid %}
+                <td>yes</td>
+            {% else %}
+                <td>no</td>
+            {% endif %}
+			{% if order.shipped %}
+				<td>yes</td>
+			{% else %}
+				<td>no</td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+</table>
+</center>
+{% endblock %}
+

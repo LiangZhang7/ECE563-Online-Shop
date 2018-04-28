@@ -1,0 +1,22 @@
+{% load static %}
+<body>
+<center>
+<body style="background: #ffffff url({% static "img.jpg" %})">
+<div style="color:navy">
+<h1>Welcome to Liang's Online Shop</h1>
+</div>
+<!--
+  <div class="slogan">
+  <div style = "color:brown">
+    <p>Visit Liang's online shop as a tourist</p>
+  </div>
+  <div class="input_container">
+    <form action="/shop/product_list/">
+      <input type="submit" value="OK" class="fancy create_account" />
+    </form>
+  </div>
+-->
+    <a href="{% url 'shop:login' %}">Login</a><br>
+    <a href="{% url 'shop:register' %}">Register</a>
+</body>
+

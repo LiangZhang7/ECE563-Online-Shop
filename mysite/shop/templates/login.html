@@ -1,0 +1,39 @@
+{% load static %}
+<html>
+<center>
+{% block title %}<h1>Welcome to Liang's Online Shop</h1>{% endblock %}
+{% block body %}
+<body style="background: #ffffff url({% static "img.jpg" %})">
+<h2>Please Login：</h2>
+
+{% if error_msg %}
+<div style = "color:red">
+  <h3>{{error_msg}}</h3>
+  </div>
+{% endif %}
+
+<form method = 'post' enctype="multipart/form-data">
+    {{lf.as_p}}
+        <input type="submit" value = "Submit" />
+</form>
+  <div class="slogan">
+    <p>Return to Register</p>
+  </div>
+  <div class="input_container">
+    <form action="/shop/register/">
+      <input type="submit" value="OK" class="fancy create_account" />
+    </form>
+  </div>
+<!--
+  <div class="slogan">
+    <p>Visit Liang's online shop as a tourist</p>
+  </div>
+  <div class="input_container">
+    <form action="/shop/product_list/">
+      <input type="submit" value="OK" class="fancy create_account" />
+    </form>
+  </div>
+-->
+{% endblock %}
+</html>
+

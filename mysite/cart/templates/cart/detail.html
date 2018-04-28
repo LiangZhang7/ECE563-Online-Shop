@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Shopping Cart Detail
+{% endblock %}
+
+{% block content %}
+<h1>welcome: {{user.username}} !</h1>
+    <p><a href ="{% url 'shop:logout' %}">logout</a></p>
+	{% if user%}
+		<p><a href ="{% url 'orders:history' %}">order history</a></p>
+	{% endif %}
+
+    <div style = "color:brown">
+    <h1>Shopping Cart Detail</h1>
+	</div>
+    <table class="cart">
+        <thead>
+            <tr>
+                <th>Photo</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Delete</th>
+                <th>Unit Price</th>                
+                <th>Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item in cart %}
+            {% with product=item.product %}
+            <tr>
+                <td>
+                    <a href="{{ product.get_absolute_url }}">
+                        <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.jpg" %}{% endif %}">
+                    </a>
+                </td>
+                <td>{{ product.name }}</td>
+                <td>
+				<form action="{% url "cart:cart_add" product.id %}" method="post">
+				{{ item.update_quantity_form.quantity }}
+				{{ item.update_quantity_form.update }}
+				<input type="submit" value="Modify">
+				</form>
+				</td>
+                <td><a href="{% url "cart:cart_remove" product.id %}">Delete</a></td>
+                <td class="num">${{ item.price }}</td>
+                <td class="num">${{ item.total_price }}</td>
+            </tr>
+            {% endwith %}
+        {% endfor %}
+        <tr class="total">
+            <td>Cart Subtotal</td>
+            <td colspan="4"></td>
+            <td class="num">${{ cart.get_total_price }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <p class="text-right">
+        <a href="{% url "shop:product_list" %}" class="button light">to Continue Shopping</a>
+       <a href="{% url "orders:order_create" %}" class="button">
+	   Proceed to Checkout
+	   </a> 
+    </p>
+{% endblock %}
